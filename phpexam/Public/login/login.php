@@ -9,7 +9,7 @@
   {
 
       // connect to database
-      if (($connection = mysqli_connect("localhost", "phpexam", "123456","phpexam")) === false)
+      if (($connection = mysqli_connect("localhost","wrong_user","my_password","my_db")) === false)
           die("Could not connect to database");
 
       // select database
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-
+<!--登录界面作者的空间 https://space.bilibili.com/108279272 -->
 </body>
 
 
