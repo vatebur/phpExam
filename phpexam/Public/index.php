@@ -4,19 +4,22 @@
 
 ?>
 
-  <h1>php考试</h1>
- 
-<!--
- 检测用户是否登录，已登录跳转到考试界面
-没登陆跳转到登录界面
-   -->   
-
+  <h1>随机测验</h1>
+  
   <?php if(isset($_SESSION["authenticated"])) { 
      $host = $_SERVER["HTTP_HOST"];
   $path = rtrim(dirname($_SERVER["PHP_SELF"]), "/\\");
    header("Location: http://$host$path/exam/index.php");
    ?>
-
+ <!--
+ <h2>欢迎您, !</h2>
+  <ul>
+    <li><a href="dxtcs.php">单选题题目</a></li>
+    <li><a href="duocs.php">多选题测试</a></li>
+    <li><a href="pdtcs.php">判断题测试</a></li>
+    <li><a href="logout.php">注销登录</a></li>
+  </ul>
+   --> 
    
   <?php } else { 
  // <h2>请登录用户！</h2>

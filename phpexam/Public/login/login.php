@@ -9,26 +9,26 @@
   {
 
       // connect to database
-      if (($connection = mysqli_connect("localhost","wrong_user","my_password","my_db")) === false)
+      if (($connection = mysql_connect("localhost", "phpexam", "123456")) === false)
           die("Could not connect to database");
 
       // select database
-      if (mysqli_select_db($connection,"tzfx") === false)
+      if (mysql_select_db("tzfx", $connection) === false)
           die("Could not select database");
 
       // prepare SQL
       $sql = sprintf("SELECT 1 FROM users WHERE user='%s' AND pass=AES_ENCRYPT('%s', '%s')",
-                     mysqli_real_escape_string($connection,$_POST["user"]),
-                     mysqli_real_escape_string($connection,$_POST["pass"]),
-                     mysqli_real_escape_string($connection,$_POST["pass"]));
+                     mysql_real_escape_string($_POST["user"]),
+                     mysql_real_escape_string($_POST["pass"]),
+                     mysql_real_escape_string($_POST["pass"]));
 
       // execute query
-      $result = mysqli_query($connection,$sql);
+      $result = mysql_query($sql);
       if ($result === false)
           die("Could not query database");
 
       // check whether we found a row
-      if (mysqli_num_rows($result) == 1) {
+      if (mysql_num_rows($result) == 1) {
           // remember that user's logged in
           $_SESSION["authenticated"] = true;
           $_SESSION["user"] = $_POST["user"];
@@ -77,7 +77,7 @@
         </div>
     </div>
 
-<!--登录界面作者的空间 https://space.bilibili.com/108279272 -->
+
 </body>
 
 

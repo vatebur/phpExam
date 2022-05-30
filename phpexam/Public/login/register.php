@@ -9,25 +9,25 @@
     {
 
         // connect to database
-        if (($connection = mysqli_connect("localhost","wrong_user","my_password","my_db")) === false)
+        if (($connection = mysql_connect("localhost", "phpexam", "123456")) === false)
             die("Could not connect to database");
 
         // select database
-        if (mysqli_select_db($connection,"tzfx") === false)
+        if (mysql_select_db("tzfx", $connection) === false)
             die("Could not select database");
 
-        $name = sprintf("SELECT 1 FROM `users` WHERE `user` = '%s'", mysqli_real_escape_string($connection,$_POST["user"]));
+        $name = sprintf("SELECT 1 FROM `users` WHERE `user` = '%s'", mysql_real_escape_string($_POST["user"]));
 
-        $result = mysqli_query($connection,$name);
-        if (mysqli_num_rows($result) == 0) {
+        $result = mysql_query($name);
+        if (mysql_num_rows($result) == 0) {
           // prepare SQL
           $sql = sprintf("INSERT INTO `users` (`user`, `pass`) VALUES ('%s' , AES_ENCRYPT('%s', '%s'))",
-                       mysqli_real_escape_string($connection,$_POST["user"]),
-                       mysqli_real_escape_string($connection,$_POST["pass1"]),
-                       mysqli_real_escape_string($connection,$_POST["pass1"]));
+                       mysql_real_escape_string($_POST["user"]),
+                       mysql_real_escape_string($_POST["pass1"]),
+                       mysql_real_escape_string($_POST["pass1"]));
 
           // execute query
-          $result = mysqli_query($connection,$sql);
+          $result = mysql_query($sql);
           if ($result === false)    {
             die("Could not query database");
           } else {
